@@ -18,6 +18,7 @@ indeterminate bool =
 type Node
     = Node
         { text : String
+        , expanded : Bool
         , checked : Bool
         , indeterminate : Bool
         , nodes : List Node
@@ -56,7 +57,16 @@ viewNode node =
                     ]
                     []
                 , text node.text
+                , viewChildNodes node
                 ]
+
+
+viewChildNodes node =
+    if node.expanded then
+        div []
+            (List.map viewNode node.nodes)
+    else
+        text ""
 
 
 type Msg
@@ -75,17 +85,35 @@ initialModel =
     { nodes =
         [ Node
             { text = "Test 1"
+            , expanded = False
             , checked = False
-            , indeterminate = False
-            , nodes = []
+            , indeterminate = True
+            , nodes =
+                [ Node
+                    { text = "sub node 1-1"
+                    , expanded = False
+                    , checked = False
+                    , indeterminate = False
+                    , nodes = []
+                    }
+                , Node
+                    { text = "sub node 1-2"
+                    , expanded = False
+                    , checked = True
+                    , indeterminate = False
+                    , nodes = []
+                    }
+                ]
             }
         , Node
             { text = "Test 2"
-            , checked = True
+            , expanded = True
+            , checked = False
             , indeterminate = False
             , nodes =
                 [ Node
-                    { text = "sub node 1"
+                    { text = "sub node 2"
+                    , expanded = False
                     , checked = False
                     , indeterminate = False
                     , nodes = []
@@ -94,8 +122,9 @@ initialModel =
             }
         , Node
             { text = "Test 3"
-            , checked = False
-            , indeterminate = True
+            , expanded = False
+            , checked = True
+            , indeterminate = False
             , nodes = []
             }
         ]
