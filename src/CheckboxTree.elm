@@ -7,12 +7,11 @@ import Html exposing (..)
 
 import Html.Attributes exposing (..)
 import Json.Encode as Json
-import VirtualDom
 
 
 indeterminate : Bool -> Attribute msg
 indeterminate bool =
-    VirtualDom.property "indeterminate" (Json.bool bool)
+    property "indeterminate" (Json.bool bool)
 
 
 type Node
@@ -26,8 +25,7 @@ type Node
 
 
 
-{- This is kind of a subtle distinction. I suggested the naive fix, but you can
-   often do something a bit nicer. So I would recommend reading more at:
+{-
    <https://github.com/elm-lang/elm-compiler/blob/0.18.0/hints/recursive-alias.md>
 -}
 
