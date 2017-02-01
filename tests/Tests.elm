@@ -4,12 +4,14 @@ import Test exposing (..)
 import Expect
 import Fuzz exposing (list, int, tuple, string)
 import String
+import NodeTests
 
 
 all : Test
 all =
-    describe "Sample Test Suite"
-        [ describe "Unit test examples"
+    describe "Elm Checkbox Tests"
+        [ NodeTests.all
+        , describe "Unit test examples"
             [ test "Addition" <|
                 \() ->
                     Expect.equal (3 + 7) 10
